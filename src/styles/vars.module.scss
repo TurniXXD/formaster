@@ -1,0 +1,66 @@
+$primary: #051014;
+$secondary: #a599b5;
+$gray: #2e2f2f;
+$lightGray: #acbdba;
+$azure: #cddddd;
+$success: #3b993d;
+$fail: #ff0000;
+$warning: #d1ab24;
+$blue: #3f6cbf;
+$shadow: #0e191d;
+$inprogress: $blue;
+$info: $blue;
+$text: $lightGray;
+
+$duration: 0.3s;
+
+$padding: 1rem;
+$radius: 10px;
+$gap: $padding;
+
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1506px;
+
+@mixin CoreStyle {
+  border-radius: $radius;
+  padding: $padding;
+  outline: none;
+}
+
+@mixin screen-sm {
+  @media (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin screen-md {
+  @media (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin screen-lg {
+  @media (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin screen-xl {
+  @media (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin screen-xxl {
+  @media (min-width: $xxl) {
+    @content;
+  }
+}
+
+// Example module export
+// :export {
+// primaryColor: $primary;
+// }

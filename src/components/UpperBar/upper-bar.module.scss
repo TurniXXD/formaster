@@ -1,0 +1,15 @@
+@use "./../../styles/vars.module.scss" as *;
+
+.upperBar {
+  display: flex;
+  justify-content: end;
+  .actionArea {
+    display: flex;
+    flex-direction: row;
+    gap: $gap;
+  }
+}
+
+.withTitle {
+  justify-content: space-between;
+}

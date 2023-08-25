@@ -1,0 +1,12 @@
+{
+  "common": {
+    "title": "Formaster",
+    "login": "Log In",
+    "dashboard": "Přehled",
+    "formBuilder": "Nový formulář",
+    "formTester": "Test formuláře"
+  },
+  "dashboard": {},
+  "formBuilder": {},
+  "formTester": {}
+}

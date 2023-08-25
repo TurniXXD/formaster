@@ -1,2 +1,4 @@
-# formaster
-run `git push -u origin master` after everything is done
+# Formaster
+
+- Web form builder
+- Deployed on vercel, and available on [formaster.vantuch.dev](https://formaster.vantuch.dev)

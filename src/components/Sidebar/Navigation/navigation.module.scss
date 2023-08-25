@@ -1,0 +1,15 @@
+@use "./../../../styles/vars.module.scss" as *;
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+  a {
+    text-decoration: none;
+    color: $text;
+  }
+}

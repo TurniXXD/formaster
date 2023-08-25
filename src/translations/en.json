@@ -1,0 +1,12 @@
+{
+  "common": {
+    "title": "Formaster",
+    "login": "Log In",
+    "dashboard": "Dashboard",
+    "formBuilder": "Form builder",
+    "formTester": "Form tester"
+  },
+  "dashboard": {},
+  "formBuilder": {},
+  "formTester": {}
+}

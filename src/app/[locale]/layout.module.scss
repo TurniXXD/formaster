@@ -1,0 +1,51 @@
+@use "./../../styles/vars.module" as *;
+
+.body {
+  color: $text;
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  gap: $gap;
+  height: 100vh;
+  padding: $padding;
+  .sidebar {
+    grid-column: 1 / 1;
+    grid-row: 1 / span 2;
+  }
+  .upperBar {
+    grid-column: 2 / 2;
+    grid-row: 1 / 2;
+  }
+  .childrenWrapper {
+    grid-column: 2 / 2;
+    grid-row: 2 / span 1;
+  }
+}
+
+.hideSidebarCol {
+  grid-template-columns: 1fr;
+  .upperBar {
+    grid-column: 1 / 1;
+  }
+  .childrenWrapper {
+    grid-column: 1 / 1;
+  }
+}
+
+.loginCardWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 340px;
+    max-height: 500px;
+  }
+}

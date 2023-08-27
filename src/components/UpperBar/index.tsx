@@ -5,11 +5,13 @@ import LangSelect from "./LangSelect";
 import styles from "./upper-bar.module.scss";
 import { useTranslations } from "next-intl";
 import { Card } from "../UI/Card";
-import { signOut } from "next-auth/react";
-import { Button } from "../UI/Button";
-import { Menu } from "react-feather";
-import { useState } from "react";
+import { Menu, X } from "react-feather";
+import { useEffect, useState } from "react";
 import { useMedia } from "react-use";
+import Navigation from "../Navigation";
+import LogoutButton from "./LogoutButton";
+import { md } from "@/constants";
+import { usePathname } from "next-intl/client";
 
 export default function UpperBar({
   isAuthenticated,
@@ -20,35 +22,58 @@ export default function UpperBar({
   locale: string;
   className: string;
 }) {
-  // todo: mobile menu
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const t = useTranslations("common");
-  const isMobile = useMedia("(max-width: 768px)", false);
+  const isMobile = useMedia(`(max-width: ${md}px)`, false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    !isMobile && setOpenMobileMenu(false);
+  }, [isMobile]);
+
+  useEffect(() => {
+    setOpenMobileMenu(false);
+  }, [pathname]);
 
   return (
-    <Card
-      className={`${styles.upperBar} ${
-        !isAuthenticated || isMobile ? styles.withTitle : ""
-      } ${className || ""}`}
-    >
-      {(!isAuthenticated || isMobile) && (
-        <Title size={ETitleSize.lg}>{t("title")}</Title>
-      )}
-      <div className={styles.actionArea}>
-        {isMobile ? (
-          <Menu
-            onClick={() => setOpenMobileMenu((val) => !val)}
-            className={styles.mobileMenuButton}
-          />
-        ) : (
-          <>
-            <LangSelect locale={locale} />
-            {isAuthenticated && (
-              <Button onClick={() => signOut()}>{t("logoutButton")}</Button>
-            )}
-          </>
+    <Card className={`${styles.upperBar} ${className || ""}`}>
+      <div
+        className={`${styles.upperBarContent} ${
+          !isAuthenticated || isMobile ? styles.withTitle : ""
+        }`}
+      >
+        {(!isAuthenticated || isMobile) && (
+          <Title size={ETitleSize.lg}>{t("title")}</Title>
         )}
+        <div className={styles.actionArea}>
+          <LangSelect locale={locale} />
+          {isMobile && isAuthenticated ? (
+            openMobileMenu ? (
+              <X
+                onClick={() => setOpenMobileMenu((val) => !val)}
+                className={styles.mobileMenuButton}
+              />
+            ) : (
+              <Menu
+                onClick={() => setOpenMobileMenu((val) => !val)}
+                className={styles.mobileMenuButton}
+              />
+            )
+          ) : (
+            isAuthenticated && <LogoutButton label={t("logoutButton")} />
+          )}
+        </div>
       </div>
+      {openMobileMenu && (
+        <div className={styles.mobileMenu}>
+          <div>
+            <Navigation />
+          </div>
+          <div className={styles.mobileMenuLogout}>
+            {isAuthenticated && <LogoutButton label={t("logoutButton")} />}
+          </div>
+        </div>
+      )}
     </Card>
   );
 }

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import styles from "./sidebar.module.scss";
 import Title, { ETitleSize } from "../UI/Title";
-import Navigation from "./Navigation";
+import Navigation from "../Navigation";
 import { Card } from "../UI/Card";
 import { Session } from "next-auth";
 import Image from "next/image";

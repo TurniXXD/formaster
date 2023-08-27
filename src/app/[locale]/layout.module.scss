@@ -29,12 +29,25 @@
   }
 }
 
-.hideSidebarCol {
+@mixin hide-sidebar-col {
   grid-template-columns: 1fr;
+  .sidebar {
+    display: none;
+  }
   .upperBar {
     grid-column: 1 / 1;
   }
   .childrenWrapper {
     grid-column: 1 / 1;
   }
+}
+
+@include max-md {
+  .layout {
+    @include hide-sidebar-col;
+  }
+}
+
+.hideSidebarCol {
+  @include hide-sidebar-col;
 }

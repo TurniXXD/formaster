@@ -32,7 +32,7 @@ export default function Login() {
     ) {
       setTranslatableError(errorParam as ETranslatableErrors);
     }
-  }, []);
+  }, [errorParam]);
 
   const onSubmit = (data: any) => {
     signIn(EAuthProviders.credentials, {

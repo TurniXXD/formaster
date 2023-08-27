@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import styles from "./form-tester.module.scss";
+import styles from "./form-tester-list.module.scss";
 
 export default function FormTesterPage() {
   const t = useTranslations("common");

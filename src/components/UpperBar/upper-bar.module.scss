@@ -1,22 +1,38 @@
 @use "./../../styles/vars.module.scss" as *;
 
 .upperBar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  .actionArea {
+  .upperBarContent {
     display: flex;
-    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
-    gap: $spacing;
-    .mobileMenuButton {
-      &:hover {
-        cursor: pointer;
+    flex-direction: row;
+    width: 100%;
+    .actionArea {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing;
+      .mobileMenuButton {
+        &:hover {
+          cursor: pointer;
+        }
       }
+    }
+  }
+  .mobileMenu {
+    padding: $spacing * 2 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .mobileMenuLogout {
+      padding-top: $spacing * 1.5;
+      display: flex;
+      justify-content: center;
     }
   }
 }
 
 .withTitle {
-  justify-content: space-between;
+  justify-content: space-between !important;
 }

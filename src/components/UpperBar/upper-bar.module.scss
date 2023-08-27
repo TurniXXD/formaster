@@ -2,11 +2,18 @@
 
 .upperBar {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
+  align-items: center;
   .actionArea {
     display: flex;
     flex-direction: row;
-    gap: $gap;
+    align-items: center;
+    gap: $spacing;
+    .mobileMenuButton {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 

@@ -1,0 +1,12 @@
+@use './../../../styles/vars.module.scss' as *;
+
+.textField {
+  border: 2px solid $lightAzure;
+  background-color: $azure;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none
+}

@@ -1,0 +1,25 @@
+@use "./../../../styles/vars.module.scss" as *;
+
+.title {
+  font-weight: 600;
+}
+
+.sm {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.base {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.lg {
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.xl {
+  font-size: 38px;
+  line-height: 1.4;
+}

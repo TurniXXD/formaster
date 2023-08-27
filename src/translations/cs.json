@@ -1,12 +1,33 @@
 {
   "common": {
     "title": "Formaster",
-    "login": "Log In",
-    "dashboard": "Přehled",
+    "login": "Přihlášení",
+    "logoutButton": "Odhlásit se",
+    "availableForms": "Dostupné formuláře",
     "formBuilder": "Nový formulář",
-    "formTester": "Test formuláře"
+    "formTester": "Test formuláře",
+    "email": "Email",
+    "password": "Heslo",
+    "errors": {},
+    "validations": {
+      "isRequired": "Pole musí být vyplněno"
+    }
   },
-  "dashboard": {},
+  "login": {
+    "loginButton": "Přihlásit se",
+    "github": "Github",
+    "or": "nebo",
+    "emailPlaceholder": "jnovak@seznam.cz",
+    "passwordPlaceholder": "Heslo",
+    "validations": {
+      "emailInvalid": "Email není validní"
+    },
+    "errors": {
+      "invalid_email": "Uživatel s touto emailovou adresou neexistuje",
+      "invalid_password": "Špatné heslo"
+    }
+  },
+  "availableForms": {},
   "formBuilder": {},
   "formTester": {}
 }

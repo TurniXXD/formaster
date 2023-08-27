@@ -1,12 +1,15 @@
 import { useTranslations } from "next-intl";
 import styles from "./form-builder.module.scss";
+import { Card } from "@/components/UI/Card";
 
-export default function FormBuilder() {
+export default function FormBuilderPage() {
   const t = useTranslations("common");
 
+  // todo: get editFormId query param and load values
+
   return (
-    <section className={styles.formBuilder}>
+    <Card className={styles.formBuilder}>
       <div>hello, {t("formBuilder")}</div>
-    </section>
+    </Card>
   );
 }

@@ -2,11 +2,32 @@
   "common": {
     "title": "Formaster",
     "login": "Log In",
-    "dashboard": "Dashboard",
+    "logoutButton": "Log Out",
+    "availableForms": "Available forms",
     "formBuilder": "Form builder",
-    "formTester": "Form tester"
+    "formTester": "Form tester",
+    "email": "Email",
+    "password": "Password",
+    "errors": {},
+    "validations": {
+      "isRequired": "This field is required"
+    }
   },
-  "dashboard": {},
+  "login": {
+    "loginButton": "Log In",
+    "github": "Github",
+    "or": "or",
+    "emailPlaceholder": "jnovak@seznam.cz",
+    "passwordPlaceholder": "Password",
+    "validations": {
+      "emailInvalid": "Invalid email"
+    },
+    "errors": {
+      "invalid_email": "User with this email address doesn't exist",
+      "invalid_password": "Wrong password"
+    }
+  },
+  "availableForms": {},
   "formBuilder": {},
   "formTester": {}
 }

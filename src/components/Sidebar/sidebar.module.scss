@@ -1,4 +1,16 @@
-@use './../../styles/vars.module.scss' as *;
+@use "./../../styles/vars.module.scss" as *;
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing * 2;
+  .userCard {
+    display: flex;
+    gap: $spacing;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary;
+    border-radius: $radius;
+    padding: $spacing;
+  }
 }

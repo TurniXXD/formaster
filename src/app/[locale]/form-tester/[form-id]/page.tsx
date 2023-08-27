@@ -6,7 +6,7 @@ export default function FormTesterPage() {
 
   return (
     <section className={styles.formTester}>
-      hello, {t("formTester")}, cards as forms for selection
+      hello, {t("formTester")}, show specific form
     </section>
   );
 }

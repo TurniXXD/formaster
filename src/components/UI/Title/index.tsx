@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import styles from "./title.module.scss";
 
 export enum ETitleSize {
   sm = "sm",
@@ -17,7 +18,7 @@ export default function Title({
   className?: string;
 }) {
   return (
-    <span className={`size-${size || ETitleSize.base} ${className || ""}`}>
+    <span className={`${styles[size || ETitleSize.base]} ${className || ""}`}>
       {children}
     </span>
   );

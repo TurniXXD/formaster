@@ -1,34 +1,35 @@
-$primary: #051014;
+$primary: #191c1d;
 $secondary: #a599b5;
 $gray: #2e2f2f;
 $lightGray: #acbdba;
 $azure: #cddddd;
-$success: #3b993d;
+$lightAzure: #e4f2f2;
 $fail: #ff0000;
 $warning: #d1ab24;
 $blue: #3f6cbf;
-$shadow: #0e191d;
+$shadow: #191c1d;
+$text: $azure;
+
 $inprogress: $blue;
 $info: $blue;
-$text: $lightGray;
+$success: #d4edda;
+$bgSuccess: #131b15;
+$error: #f8d7da;
+$bgError: #1d1313;
 
 $duration: 0.3s;
+$transition: all $duration ease-in-out;
 
-$padding: 1rem;
+$separator: 2px solid $azure;
+
+$spacing: 1rem;
 $radius: 10px;
-$gap: $padding;
 
 $sm: 640px;
 $md: 768px;
 $lg: 1024px;
 $xl: 1280px;
 $xxl: 1506px;
-
-@mixin CoreStyle {
-  border-radius: $radius;
-  padding: $padding;
-  outline: none;
-}
 
 @mixin screen-sm {
   @media (min-width: $sm) {

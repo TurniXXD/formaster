@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import styles from './home.module.scss'
-import { useTranslations } from 'next-intl'
+import { getServerSession } from "next-auth";
+import Home from "@/components/Home";
+import { Card } from "@/components/UI/Card";
 
-export default function Home() {
-  const t = useTranslations('common')
+export default async function HomePage() {
+  const session = await getServerSession();
 
   return (
-    <main className={styles.home}>
-      Home
-    </main>
-  )
+    <Card>
+      <Home session={session} />
+    </Card>
+  );
 }

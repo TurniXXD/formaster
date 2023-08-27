@@ -4,15 +4,17 @@
   color: $text;
   margin: 0;
   padding: 0;
+  background-color: $primary;
 }
 
 .layout {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  gap: $gap;
-  height: 100vh;
-  padding: $padding;
+  min-height: 96.8vh;
+  gap: $spacing;
+  grid-gap: $spacing;
+  padding: $spacing;
   .sidebar {
     grid-column: 1 / 1;
     grid-row: 1 / span 2;
@@ -34,18 +36,5 @@
   }
   .childrenWrapper {
     grid-column: 1 / 1;
-  }
-}
-
-.loginCardWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .children {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 340px;
-    max-height: 500px;
   }
 }

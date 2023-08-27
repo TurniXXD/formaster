@@ -1,0 +1,22 @@
+@use './../../../styles/vars.module.scss' as *;
+
+.popup {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: $radius;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.error {
+  background-color: $bgError;
+  color: $error;
+  border: 1px solid $error;
+}
+
+.success {
+  background-color: $bgSuccess;
+  color: $success;
+  border: 1px solid $success;
+}

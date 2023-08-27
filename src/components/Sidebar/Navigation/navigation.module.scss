@@ -3,7 +3,7 @@
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: $gap;
+  gap: $spacing;
   div {
     display: flex;
     flex-direction: row;
@@ -11,5 +11,22 @@
   a {
     text-decoration: none;
     color: $text;
+    font-size: 1.2rem;
+    padding: $spacing;
+    transition: $transition;
+    &:hover {
+      background-color: $primary;
+      border-radius: $radius;
+    }
+  }
+}
+
+.active {
+  background-color: $azure;
+  color: $gray !important;
+  font-size: 1.2rem;
+  border-radius: $radius;
+  &:hover {
+    color: $text !important;
   }
 }

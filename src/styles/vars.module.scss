@@ -2,6 +2,7 @@ $primary: #191c1d;
 $secondary: #a599b5;
 $gray: #2e2f2f;
 $lightGray: #acbdba;
+$darkGray: #242727;
 $azure: #cddddd;
 $lightAzure: #e4f2f2;
 $fail: #ff0000;
@@ -89,6 +90,14 @@ $xxl: 1506px;
   @media (max-width: $xxl) {
     @content;
   }
+}
+
+@mixin button-hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 15px 2px $gray;
+  background-color: $primary;
+  color: $azure;
+  gap: $spacing * 1.5;
 }
 
 // Example module export

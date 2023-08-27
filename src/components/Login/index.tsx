@@ -9,20 +9,31 @@ import styles from "./login.module.scss";
 import { TextField } from "@/components/UI/TextField";
 import Popup, { PopupType } from "@/components/UI/Popup";
 import { Button } from "@/components/UI/Button";
-import { EAuthProviders, ETranslatableErrors } from "@/types";
+import { EAuthProviders, ETranslatableErrors, Forms } from "@/types";
 import { ArrowRightCircle, GitHub } from "react-feather";
 import { Card } from "../UI/Card";
 import Title, { ETitleSize } from "../UI/Title";
+import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
+import { Session } from "next-auth";
+import { authRedirectConfig } from "@/constants";
 
-export default function Login() {
+export default function Login({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const tCommon = useTranslations("common");
   const t = useTranslations("login");
   const { handleSubmit, control } = useForm();
   const [translatableError, setTranslatableError] =
     useState<ETranslatableErrors | null>();
+  const { value, removeLocalStorageItem } = useLocalStorage<Forms>(
+    ELocalStorageItems.forms
+  );
 
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  useEffect(() => {
+    if (!session && value) {
+      removeLocalStorageItem();
+    }
+  }, [value, session, removeLocalStorageItem]);
+
   const errorParam = searchParams.get("error");
 
   useEffect(() => {
@@ -38,8 +49,7 @@ export default function Login() {
     signIn(EAuthProviders.credentials, {
       email: data.email,
       password: data.password,
-      redirect: true,
-      callbackUrl,
+      ...authRedirectConfig,
     });
   };
 
@@ -94,12 +104,7 @@ export default function Login() {
         <Button
           label={t("github")}
           icon={<GitHub />}
-          onClick={() =>
-            signIn(EAuthProviders.github, {
-              redirect: true,
-              callbackUrl,
-            })
-          }
+          onClick={() => signIn(EAuthProviders.github, authRedirectConfig)}
         />
       </Card>
       {translatableError && (

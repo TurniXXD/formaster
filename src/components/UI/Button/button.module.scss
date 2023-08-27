@@ -10,15 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: $spacing * 0.75;
   border: none;
   box-shadow: 0px 0px 15px 2px $primary;
   transition: $transition;
   &:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 15px 2px $gray;
-    background-color: $primary;
-    color: $azure;
+    @include button-hover;
   }
 }
 

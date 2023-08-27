@@ -8,6 +8,10 @@ export const authPages = {
   signOut: "/auth/login/",
   error: "/auth/login/",
 };
+export const authRedirectConfig = {
+  redirect: true,
+  callbackUrl: "/",
+}
 export const sm = "640";
 export const md = "768";
 export const lg = "1024";

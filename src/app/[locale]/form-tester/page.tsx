@@ -1,12 +1,5 @@
-import { useTranslations } from "next-intl";
-import styles from "./form-tester-list.module.scss";
+import FormTesterList from "@/components/FormTesterList";
 
 export default function FormTesterPage() {
-  const t = useTranslations("common");
-
-  return (
-    <section className={styles.formTester}>
-      hello, {t("formTester")}, cards as forms for selection
-    </section>
-  );
+  return <FormTesterList />;
 }

@@ -8,5 +8,5 @@ export default async function LoginPage() {
     return { redirect: { destination: "/" } };
   }
 
-  return <Login />;
+  return <Login session={session} />;
 }

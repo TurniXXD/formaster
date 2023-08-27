@@ -29,5 +29,10 @@
   },
   "availableForms": {},
   "formBuilder": {},
-  "formTester": {}
+  "formTester": {
+    "openForm": "Přejít k vyplnění",
+    "questionsCount": "Otázek k vyplnění",
+    "createdAt": "Vytvořeno",
+    "updatedAt": "Upraveno"
+  }
 }

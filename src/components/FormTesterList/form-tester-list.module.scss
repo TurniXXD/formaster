@@ -1,0 +1,60 @@
+@use "./../../styles/vars.module" as *;
+
+.formTesterList {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: $spacing;
+  .formCard {
+    display: flex;
+    flex-direction: column;
+    transition: $transition;
+    height: 20rem;
+    justify-content: space-between;
+    .formProperties {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing * 0.75;
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+    &:hover {
+      background-color: $darkGray;
+      button {
+        @include button-hover;
+      }
+    }
+  }
+}
+
+@include min-sm {
+  .formTesterList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include min-md {
+  .formTesterList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@include min-lg {
+  .formTesterList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include min-xl {
+  .formTesterList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@include min-xxl {
+  .formTesterList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

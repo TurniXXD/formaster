@@ -29,5 +29,10 @@
   },
   "availableForms": {},
   "formBuilder": {},
-  "formTester": {}
+  "formTester": {
+    "openForm": "Open form",
+    "questionsCount": "Number of questions",
+    "createdAt": "Created",
+    "updatedAt": "Updated"
+  }
 }

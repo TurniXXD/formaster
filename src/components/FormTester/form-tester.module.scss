@@ -1,0 +1,42 @@
+@use "./../../styles/vars.module" as *;
+
+.formTester {
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing * 3;
+    margin: $spacing * 2 0;
+    .formField {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing;
+      input,
+      textarea {
+        background-color: $darkGray;
+      }
+    }
+  }
+}
+
+@include min-sm {
+  .formTester {
+    padding: $spacing;
+    @include card;
+    .form {
+      gap: $spacing * 2;
+      .formField {
+        input,
+        textarea {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+}
+
+@include min-lg {
+  .formTester {
+    padding: $spacing * 3;
+  }
+}

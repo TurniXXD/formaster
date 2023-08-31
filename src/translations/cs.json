@@ -11,11 +11,16 @@
     "save": "Uložit",
     "cancel": "Zrušit",
     "translate": "Přeložit",
+    "boolean": {
+      "yes": "Ano",
+      "no": "Ne"
+    },
     "validationsLabel": "Validace",
     "validations": {
       "required": "Pole musí být vyplněno",
       "starts_with_string_value": "Text musí začínat hodnotou",
       "matches_string_value": "Text musí obsahovat hodnotu",
+      "equal_to_number_value": "Hodnota musí být rovna číslu",
       "greater_than_number_value": "Hodnota musí být větší než",
       "equal_or_greater_than_number_value": "Hodnota musí být rovna nebo větší než",
       "less_than_number_value": "Hodnota musí být menší než",
@@ -31,7 +36,8 @@
         "number": "Číslo",
         "boolean": "Ano / Ne"
       }
-    }
+    },
+    "nothingFound": "Nic nenalezeno"
   },
   "login": {
     "loginButton": "Přihlásit se",
@@ -53,6 +59,9 @@
     "openForm": "Přejít k vyplnění",
     "questionsCount": "Otázek k vyplnění",
     "createdAt": "Vytvořeno",
-    "updatedAt": "Upraveno"
+    "updatedAt": "Upraveno",
+    "validate": "Validovat",
+    "valid": "Formulář je validně vyplněn",
+    "invalid": "Formulář není validně vyplněn"
   }
 }

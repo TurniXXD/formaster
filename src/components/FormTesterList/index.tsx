@@ -9,12 +9,28 @@ import { Card } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
 import { ArrowRightCircle } from "react-feather";
 import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
-import { ELangs, Forms } from "@/types";
+import { ELangs, TForms } from "@/types";
+import { useEffect, useState } from "react";
+import { NotFound } from "../NotFound";
+import Loader from "../UI/Loader";
 
 export default function FormTesterList() {
   const t = useTranslations("formTester");
   const locale = useLocale();
-  const { value: forms } = useLocalStorage<Forms>(ELocalStorageItems.forms);
+  const { value: forms } = useLocalStorage<TForms>(ELocalStorageItems.forms);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [forms]);
+
+  if (!isLoading && !forms) {
+    return <NotFound />;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className={styles.formTesterList}>

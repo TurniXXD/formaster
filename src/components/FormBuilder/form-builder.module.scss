@@ -8,9 +8,6 @@
     .formActionButtonsWrapper {
       display: flex;
       gap: $spacing;
-      button {
-        width: 100%;
-      }
     }
     .formField {
       padding: $spacing * 2 $spacing * 2;
@@ -46,7 +43,6 @@
       .formFieldAddValidationButton {
         margin-top: $spacing * 2;
         display: flex;
-        width: 100%;
       }
       .formFieldRemoveButton {
         height: 10rem;

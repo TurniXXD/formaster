@@ -7,13 +7,13 @@ import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
 import {
   EFormFieldType,
   ELangs,
-  FormField,
-  FormFieldValidationOptions,
-  Forms,
+  IFormField,
+  IFormFieldValidationOptions,
+  TForms,
   EFormFieldValidation,
 } from "@/types";
 import { TextField } from "../UI/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createFieldTypeOptions,
   createNewFormObject,
@@ -39,18 +39,20 @@ import {
   THandleFormFieldPartChange,
   THandleFormTitleChange,
 } from "./types";
+import Loader from "../UI/Loader";
 
 export default function FormBuilder() {
   const t = useTranslations("common");
   const locale = useLocale() as ELangs;
   const isCsLocale = locale === ELangs.cs;
   const searchParams = useSearchParams();
-  const { value: forms, setValue } = useLocalStorage<Forms>(
+  const [isLoading, setIsLoading] = useState(true);
+  const { value: forms, setValue } = useLocalStorage<TForms>(
     ELocalStorageItems.forms
   );
   const editFormId = searchParams.get("editFormId");
   const editableForm = forms?.find((form) => form.id === editFormId);
-  const [fields, setFields] = useState<Array<FormField>>(
+  const [fields, setFields] = useState<Array<IFormField>>(
     editableForm ? editableForm.fields : [newFormField]
   );
   const [csFormTitle, setCsFormTitle] = useState("");
@@ -58,6 +60,14 @@ export default function FormBuilder() {
   const deeplTranslationTargetLang = isCsLocale ? ELangs.en : ELangs.cs;
   const fieldTypeOptions = createFieldTypeOptions(t);
   const formFieldValidationsOptions = createValidationsOptions(t);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [fields]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const onSubmit = () => {
     if (forms) {
@@ -322,10 +332,16 @@ export default function FormBuilder() {
           label={t("form.addNewField")}
           icon={<PlusCircle />}
           onClick={handleAddNewField}
+          fullWidth
         />
         <div className={styles.formActionButtonsWrapper}>
-          <Button label={t("cancel")} secondary onClick={handleCancel} />
-          <Button label={t("save")} submit />
+          <Button
+            label={t("cancel")}
+            onClick={handleCancel}
+            secondary
+            fullWidth
+          />
+          <Button label={t("save")} submit fullWidth />
         </div>
       </form>
     </div>
@@ -340,9 +356,9 @@ const FormFieldValidations = ({
   handleFormFieldPartChange,
 }: {
   t: any;
-  formField: FormField;
+  formField: IFormField;
   formFieldIndex: number;
-  options: FormFieldValidationOptions;
+  options: IFormFieldValidationOptions;
   handleFormFieldPartChange: THandleFormFieldPartChange;
 }) => {
   const fieldTypeSpecificOptions =

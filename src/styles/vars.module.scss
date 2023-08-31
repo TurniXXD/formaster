@@ -6,7 +6,8 @@ $lightGray: #acbdba;
 $darkGray: #242727;
 $azure: #cddddd;
 $lightAzure: #e4f2f2;
-$fail: #ff0000;
+$fail: #f04e4e;
+$failBorder: #ad2929;
 $warning: #d1ab24;
 $blue: #3f6cbf;
 $shadow: #191c1d;
@@ -15,7 +16,7 @@ $text: $azure;
 $inprogress: $blue;
 $info: $blue;
 $success: #d4edda;
-$bgSuccess: #131b15;
+$bgSuccess: #1b281e;
 $error: #f8d7da;
 $bgError: #1d1313;
 
@@ -118,6 +119,10 @@ $xxl: 1506px;
     -webkit-box-shadow: 0 0 0 30px $primary inset !important;
     -webkit-text-fill-color: $azure !important;
   }
+}
+
+.fieldError {
+  border-color: $failBorder !important;
 }
 
 @mixin card {

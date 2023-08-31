@@ -1,25 +1,17 @@
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./select-field.module.scss";
-import { SelectHTMLAttributes } from "react";
-import { FieldSelectOptions } from "@/types";
-
-export interface ISelectField extends SelectHTMLAttributes<HTMLSelectElement> {
-  /**
-   * React hook form field props
-   */
-  fieldProps?: ControllerRenderProps<FieldValues, any>;
-  options: FieldSelectOptions;
-}
+import globalStyles from "./../../../styles/vars.module.scss";
+import { TSelectField } from "@/types";
 
 export const SelectField = ({
   fieldProps,
   options,
+  error,
   ...props
-}: ISelectField) => (
-  <div className={styles.selectField}>
+}: TSelectField) => (
+  <div className={`${styles.selectField} ${error ? globalStyles.fieldError : ""}`}>
     <select {...fieldProps} {...props}>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
+      {options.map((option, i) => (
+        <option key={i} value={`${option.value}`}>
           {option.label}
         </option>
       ))}

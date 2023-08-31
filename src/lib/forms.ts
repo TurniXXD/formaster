@@ -3,16 +3,17 @@
 import {
   EFormFieldType,
   EFormFieldValidation,
-  FieldSelectOptions,
-  Form,
-  FormField,
-  FormFieldValidationOptions,
+  TFieldSelectOptions,
+  IForm,
+  IFormField,
+  IFormFieldValidationOptions,
 } from "@/types";
 import { v4 } from "uuid";
+import { convertToNumberIfPossible } from ".";
 
 export const createNewFormObject = (
-  form: Omit<Form, "id" | "createdAt" | "updatedAt"> & { id?: string }
-): Form => {
+  form: Omit<IForm, "id" | "createdAt" | "updatedAt"> & { id?: string }
+): IForm => {
   const now = new Date();
   return {
     id: form.id || v4(),
@@ -22,7 +23,7 @@ export const createNewFormObject = (
   };
 };
 
-export const newFormField: FormField = {
+export const newFormField: IFormField = {
   type: EFormFieldType.text,
   enTitle: "",
   csTitle: "",
@@ -30,9 +31,9 @@ export const newFormField: FormField = {
   validationValue: "",
 };
 
-export const createFieldTypeOptions = (t: any): FieldSelectOptions => {
+export const createFieldTypeOptions = (t: any): TFieldSelectOptions => {
   const enumValuesObject = Object.values(EFormFieldType);
-  const options: FieldSelectOptions = [];
+  const options: TFieldSelectOptions = [];
 
   enumValuesObject.map((key) => {
     options.push({
@@ -46,12 +47,12 @@ export const createFieldTypeOptions = (t: any): FieldSelectOptions => {
 
 export const createValidationsOptions = (
   t: any
-): FormFieldValidationOptions => {
+): IFormFieldValidationOptions => {
   const enumValuesObject = Object.values(EFormFieldValidation);
 
-  const common: FieldSelectOptions = [];
-  const textValue: FieldSelectOptions = [];
-  const numberValue: FieldSelectOptions = [];
+  const common: TFieldSelectOptions = [];
+  const textValue: TFieldSelectOptions = [];
+  const numberValue: TFieldSelectOptions = [];
 
   // Default without validation
   enumValuesObject.map((key) => {
@@ -84,4 +85,78 @@ export const createValidationsOptions = (
     textValue,
     numberValue,
   };
+};
+
+export const createBooleanOptions = (t: any) => {
+  return [
+    {
+      label: t("boolean.yes"),
+      value: true,
+    },
+    {
+      label: t("boolean.no"),
+      value: false,
+    },
+  ];
+};
+
+export const validateValue = (
+  value: string | number,
+  validation: EFormFieldValidation,
+  validationValue?: string
+) => {
+  if (validation === EFormFieldValidation.required) {
+    return !!value;
+  }
+
+  if (validationValue) {
+    const valueParsed = convertToNumberIfPossible(value);
+    const isString = typeof valueParsed === "string";
+
+    if (validation === EFormFieldValidation.startsWith) {
+      return (
+        isString && validationValue && valueParsed.startsWith(validationValue)
+      );
+    }
+
+    if (validation === EFormFieldValidation.matches) {
+      return (
+        isString && validationValue && valueParsed.includes(validationValue)
+      );
+    }
+
+    const numericValidationValue = parseInt(validationValue);
+
+    if (validation === EFormFieldValidation.equalTo) {
+      return (
+        !isString && validationValue && valueParsed === numericValidationValue
+      );
+    }
+
+    if (validation === EFormFieldValidation.greaterThan) {
+      return (
+        !isString && validationValue && valueParsed > numericValidationValue
+      );
+    }
+
+    if (validation === EFormFieldValidation.equalOrGreaterThan) {
+      return (
+        !isString && validationValue && valueParsed >= numericValidationValue
+      );
+    }
+
+    if (validation === EFormFieldValidation.lessThan) {
+      return (
+        !isString && validationValue && valueParsed < numericValidationValue
+      );
+    }
+
+    if (validation === EFormFieldValidation.equalOrLessThan) {
+      return (
+        !isString && validationValue && valueParsed <= numericValidationValue
+      );
+    }
+  }
+
+  return true;
 };

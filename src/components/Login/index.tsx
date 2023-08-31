@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import styles from "./login.module.scss";
 import { TextField } from "@/components/UI/TextField";
-import Popup, { PopupType } from "@/components/UI/Popup";
+import Popup, { EPopupType } from "@/components/UI/Popup";
 import { Button } from "@/components/UI/Button";
-import { EAuthProviders, Forms } from "@/types";
+import { EAuthProviders, TForms } from "@/types";
 import { ArrowRightCircle, GitHub } from "react-feather";
 import { Card } from "../UI/Card";
 import Title, { ETitleSize } from "../UI/Title";
@@ -25,7 +25,7 @@ export default function Login({ session }: { session: Session | null }) {
   const { handleSubmit, control } = useForm();
   const [translatableError, setTranslatableError] =
     useState<ELoginTranslatableErrors | null>();
-  const { value, removeItem } = useLocalStorage<Forms>(
+  const { value, removeItem } = useLocalStorage<TForms>(
     ELocalStorageItems.forms
   );
 
@@ -109,7 +109,7 @@ export default function Login({ session }: { session: Session | null }) {
         />
       </Card>
       {translatableError && (
-        <Popup type={PopupType.Error} text={t(`errors.${translatableError}`)} />
+        <Popup type={EPopupType.Error} text={t(`errors.${translatableError}`)} />
       )}
     </div>
   );

@@ -1,0 +1,13 @@
+@use "./../../../styles/vars.module.scss" as *;
+
+.radioField {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  span,
+  input {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

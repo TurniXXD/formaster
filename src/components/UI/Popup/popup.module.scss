@@ -1,11 +1,11 @@
 @use './../../../styles/vars.module.scss' as *;
 
 .popup {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: fixed;
+  right: $spacing * 2;
+  top: $spacing * 2;
   border-radius: $radius;
-  padding: 1rem;
+  padding: $spacing;
   z-index: 1000;
 }
 

@@ -31,3 +31,22 @@ export const isArrayofObjects = (value: any) => {
 export const formatDateTime = (date: Date) => {
   return format(date, "dd.MM.yyyy HH:mm");
 };
+
+export const convertToNumberIfPossible = (value: string | number) => {
+  if (typeof value === "number" ) {
+    return value
+  }
+
+  value = value.trim();
+
+  // Check if the valueing is numeric
+  if (/^[+-]?\d+(\.\d+)?$/.test(value)) {
+    if (value.includes(".")) {
+      return parseFloat(value);
+    } else {
+      return parseInt(value, 10);
+    }
+  } else {
+    return value;
+  }
+};

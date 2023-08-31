@@ -1,22 +1,18 @@
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import styles from "./number-field.module.scss";
-import { InputHTMLAttributes } from "react";
-
-export interface INumberField extends InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * React hook form field props
-   */
-  fieldProps?: ControllerRenderProps<FieldValues, any>;
-}
+import { TInputField } from "@/types";
+import globalStyles from "./../../../styles/vars.module.scss";
 
 export const NumberField = ({
   placeholder,
   fieldProps,
+  error,
   ...props
-}: INumberField) => {
+}: TInputField) => {
   return (
     <input
-      className={`${styles.numberField} ${props?.className || ""}`}
+      className={`${styles.numberField} ${props?.className || ""} ${
+        error ? globalStyles.fieldError : ""
+      }`}
       {...props}
       {...fieldProps}
       min={0}

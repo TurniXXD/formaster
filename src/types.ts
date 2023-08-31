@@ -1,5 +1,8 @@
 // Enums
 
+import { InputHTMLAttributes } from "react";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
+
 export enum ELangs {
   cs = "cs",
   en = "en",
@@ -21,6 +24,7 @@ export enum EFormFieldValidation {
   required = "required",
   startsWith = "starts_with_string_value",
   matches = "matches_string_value",
+  equalTo = "equal_to_number_value",
   greaterThan = "greater_than_number_value",
   equalOrGreaterThan = "equal_or_greater_than_number_value",
   lessThan = "less_than_number_value",
@@ -29,6 +33,25 @@ export enum EFormFieldValidation {
 
 // Interfaces & Types
 
+export interface IInputFieldCustomProps {
+  /**
+   * React hook form field props
+   */
+  fieldProps?: ControllerRenderProps<FieldValues, any>;
+  error?: boolean;
+}
+
+export type TInputField = InputHTMLAttributes<HTMLInputElement> &
+  IInputFieldCustomProps;
+
+export type TSelectField = InputHTMLAttributes<HTMLSelectElement> &
+  IInputFieldCustomProps & {
+    options: TFieldSelectOptions;
+  };
+
+export type TTextAreaField = InputHTMLAttributes<HTMLTextAreaElement> &
+  IInputFieldCustomProps;
+
 export interface IUser {
   id: string;
   name: string;
@@ -36,25 +59,25 @@ export interface IUser {
   password: string;
 }
 
-export interface FormFieldValidation {
+export interface IFormFieldValidation {
   type: EFormFieldValidation;
   value?: string;
 }
 
-interface FieldSelectOption {
-  value: string;
+interface IFieldSelectOption {
+  value: string | boolean | number;
   label: string;
 }
 
-export type FieldSelectOptions = Array<FieldSelectOption>;
+export type TFieldSelectOptions = Array<IFieldSelectOption>;
 
-export interface FormFieldValidationOptions {
-  common: FieldSelectOptions;
-  textValue: FieldSelectOptions;
-  numberValue: FieldSelectOptions;
+export interface IFormFieldValidationOptions {
+  common: TFieldSelectOptions;
+  textValue: TFieldSelectOptions;
+  numberValue: TFieldSelectOptions;
 }
 
-export interface FormField {
+export interface IFormField {
   csTitle: string;
   enTitle: string;
   type: EFormFieldType;
@@ -62,15 +85,15 @@ export interface FormField {
   validationValue: string;
 }
 
-type FormFields = Array<FormField>;
+type TFormFields = Array<IFormField>;
 
-export interface Form {
+export interface IForm {
   id: string;
   csTitle: string;
   enTitle: string;
-  fields: FormFields;
+  fields: TFormFields;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export type Forms = Array<Form>;
+export type TForms = Array<IForm>;

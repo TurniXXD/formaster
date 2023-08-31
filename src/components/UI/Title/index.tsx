@@ -12,13 +12,19 @@ export default function Title({
   size,
   children,
   className,
+  error,
 }: {
   size?: ETitleSize;
   children: ReactNode;
   className?: string;
+  error?: boolean;
 }) {
   return (
-    <span className={`${styles[size || ETitleSize.base]} ${className || ""}`}>
+    <span
+      className={`${styles[size || ETitleSize.base]} ${
+        error ? styles.error : ""
+      } ${className || ""}`}
+    >
       {children}
     </span>
   );

@@ -1,4 +1,4 @@
-import { EFormFieldType, EFormFieldValidation, Form, IUser } from "@/types";
+import { EFormFieldType, EFormFieldValidation, IForm, IUser } from "@/types";
 import { v4 } from "uuid";
 
 const now = new Date();
@@ -12,7 +12,7 @@ export const testUser: IUser = {
   password: "Nov4k_j3_n3j",
 };
 
-export const testForms: Array<Form> = [
+export const testForms: Array<IForm> = [
   {
     id: v4(),
     csTitle: "Plánování dovolené",

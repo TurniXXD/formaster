@@ -10,6 +10,7 @@ export interface IButtonProps {
   onClick?: () => void;
   children?: ReactNode;
   className?: string;
+  fullWidth?: boolean;
 }
 
 export const Button = (props: IButtonProps) => {
@@ -17,7 +18,7 @@ export const Button = (props: IButtonProps) => {
     <button
       className={`${styles.button} ${
         props.secondary ? styles.secondary : styles.primary
-      } ${props.className || ""}`}
+      } ${props.fullWidth ? styles.fullWidth : ""} ${props.className || ""}`}
       type={props.submit ? "submit" : "button"}
       onClick={props.onClick !== null ? props.onClick : undefined}
     >

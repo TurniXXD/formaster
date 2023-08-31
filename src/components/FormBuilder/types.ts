@@ -1,5 +1,4 @@
-import { ELangs, FormField } from "@/types";
-import { Dispatch, SetStateAction } from "react";
+import { ELangs } from "@/types";
 
 export type THandleFieldValueTranslation = ({ formFieldIndex, isFormTitle, }: {
   formFieldIndex?: number | undefined;

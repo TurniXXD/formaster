@@ -1,12 +1,9 @@
-import { useTranslations } from "next-intl";
-import styles from "./form-tester.module.scss";
+import FormTester from "@/components/FormTester";
 
-export default function FormTesterPage() {
-  const t = useTranslations("common");
-
-  return (
-    <section className={styles.formTester}>
-      hello, {t("formTester")}, show specific form
-    </section>
-  );
+export default function FormTesterPage({
+  params,
+}: {
+  params: { "form-id": string };
+}) {
+  return <FormTester id={params["form-id"]} />;
 }

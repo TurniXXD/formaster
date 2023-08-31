@@ -8,9 +8,29 @@
     "formTester": "Test formuláře",
     "email": "Email",
     "password": "Heslo",
-    "errors": {},
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "translate": "Přeložit",
+    "validationsLabel": "Validace",
     "validations": {
-      "isRequired": "Pole musí být vyplněno"
+      "required": "Pole musí být vyplněno",
+      "starts_with_string_value": "Text musí začínat hodnotou",
+      "matches_string_value": "Text musí obsahovat hodnotu",
+      "greater_than_number_value": "Hodnota musí být větší než",
+      "equal_or_greater_than_number_value": "Hodnota musí být rovna nebo větší než",
+      "less_than_number_value": "Hodnota musí být menší než",
+      "equal_or_less_than_number_value": "Hodnota musí být rovna nebo menší než"
+    },
+    "form": {
+      "title": "Název formuláře",
+      "name": "Název",
+      "type": "Typ",
+      "addNewField": "Přidat nové pole",
+      "fieldTypes": {
+        "text": "Text",
+        "number": "Číslo",
+        "boolean": "Ano / Ne"
+      }
     }
   },
   "login": {
@@ -23,8 +43,8 @@
       "emailInvalid": "Email není validní"
     },
     "errors": {
-      "invalid_email": "Uživatel s touto emailovou adresou neexistuje",
-      "invalid_password": "Špatné heslo"
+      "wrong_email": "Uživatel s touto emailovou adresou neexistuje",
+      "wrong_password": "Špatné heslo"
     }
   },
   "availableForms": {},

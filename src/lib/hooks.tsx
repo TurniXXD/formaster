@@ -10,7 +10,7 @@ export enum ELocalStorageItems {
 }
 
 export const setLocalStorageItem = <T extends LocalStorageValue>(
-  key: string,
+  key: ELocalStorageItems,
   value: T
 ) => {
   let valueParsed: any = value;
@@ -30,25 +30,25 @@ export const useLocalStorage = <T extends LocalStorageValue>(
 
   const initialValueParsed: T | undefined =
     initialValue && isValidJSON(initialValue) && JSON.parse(initialValue);
-  const [value, setValue] = useState<T | null>(initialValueParsed || null);
+  const [localStorageValue, setLocalStorageValue] = useState<T | null>(initialValueParsed || null);
 
-  const setLocalStorageValue = (newValue: T) => {
+  const setValue = (newValue: T) => {
     if (typeof window !== "undefined") {
-      setValue(newValue);
+      setLocalStorageValue(newValue);
       setLocalStorageItem(key, newValue);
     }
   };
 
-  const removeLocalStorageItem = () => {
+  const removeItem = () => {
     if (typeof window !== "undefined") {
-      setValue(null);
+      setLocalStorageValue(null);
       localStorage.removeItem(key);
     }
   };
 
   return {
-    value,
-    setLocalStorageValue,
-    removeLocalStorageItem,
+    value: localStorageValue,
+    setValue,
+    removeItem,
   };
 };

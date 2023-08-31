@@ -3,14 +3,13 @@
 import { useLocale, useTranslations } from "next-intl";
 import styles from "./form-tester-list.module.scss";
 import Title from "@/components/UI/Title";
-import { resolveFormTitleTranslation } from "@/lib/forms";
 import { formatDateTime } from "@/lib";
 import Link from "next/link";
 import { Card } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
 import { ArrowRightCircle } from "react-feather";
 import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
-import { Forms } from "@/types";
+import { ELangs, Forms } from "@/types";
 
 export default function FormTesterList() {
   const t = useTranslations("formTester");
@@ -22,9 +21,7 @@ export default function FormTesterList() {
       {forms?.map((form, i) => (
         <Link key={i} href={`/form-tester/${form.id}`}>
           <Card className={styles.formCard}>
-            <Title>
-              {resolveFormTitleTranslation(form.title, locale)?.value}
-            </Title>
+            <Title>{locale === ELangs.cs ? form.csTitle : form.enTitle}</Title>
             <div className={styles.formProperties}>
               <div>
                 <span>{t("questionsCount")}:</span>

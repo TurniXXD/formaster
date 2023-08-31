@@ -19,6 +19,7 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
+    DEEPL_AUTH_KEY: process.env.DEEPL_AUTH_KEY,
   },
 };
 

@@ -1,0 +1,30 @@
+@use "./../../../styles/vars.module.scss" as *;
+
+.selectField {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  select {
+    @include field;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .selectFieldArrow {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: $spacing;
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: $azure;
+    border-radius: $radius;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  }
+
+}

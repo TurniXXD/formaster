@@ -1,18 +1,12 @@
-import {
-  EFormFieldType,
-  EFormFieldValidation,
-  ELangs,
-  ETranslatableErrors,
-  Form,
-  IUser,
-} from "@/types";
+import { EFormFieldType, EFormFieldValidation, Form, IUser } from "@/types";
+import { v4 } from "uuid";
 
 const now = new Date();
 const nowBeforeTwoHours = new Date(now);
 nowBeforeTwoHours.setHours(nowBeforeTwoHours.getHours() - 2);
 
 export const testUser: IUser = {
-  id: "1",
+  id: v4(),
   name: "Jan Novák",
   email: "jnovak@seznam.cz",
   password: "Nov4k_j3_n3j",
@@ -20,129 +14,53 @@ export const testUser: IUser = {
 
 export const testForms: Array<Form> = [
   {
-    id: "1",
-    title: [
-      {
-        value: "Plánování dovolené",
-        locale: ELangs.cs,
-      },
-      {
-        value: "Vacation planning",
-        locale: ELangs.en,
-      },
-    ],
+    id: v4(),
+    csTitle: "Plánování dovolené",
+    enTitle: "Vacation planning",
     fields: [
       {
         type: EFormFieldType.text,
-        validations: [
-          {
-            type: EFormFieldValidation.required,
-            error: ETranslatableErrors.requiredField,
-          },
-        ],
-        title: [
-          {
-            value: "Kam byste chtěli jet?",
-            locale: ELangs.cs,
-          },
-          {
-            value: "Where would you like to go?",
-            locale: ELangs.en,
-          },
-        ],
+        csTitle: "Kam byste chtěli jet?",
+        enTitle: "Where would you like to go?",
+        validation: EFormFieldValidation.required,
+        validationValue: "",
       },
       {
-        type: EFormFieldType.text,
-        validations: [
-          {
-            type: EFormFieldValidation.required,
-            error: ETranslatableErrors.requiredField,
-          },
-        ],
-        title: [
-          {
-            value: "Jaký je váš rozpočet na dovolenou?",
-            locale: ELangs.cs,
-          },
-          {
-            value: "What is your vacation budget",
-            locale: ELangs.en,
-          },
-        ],
+        type: EFormFieldType.number,
+        csTitle: "Jaký je váš rozpočet na dovolenou?",
+        enTitle: "What is your vacation budget?",
+        validation: EFormFieldValidation.required,
+        validationValue: "",
       },
       {
         type: EFormFieldType.boolean,
-        validations: [
-          {
-            type: EFormFieldValidation.required,
-            error: ETranslatableErrors.requiredField,
-          },
-        ],
-        title: [
-          {
-            value: "Máte rádi pizzu?",
-            locale: ELangs.cs,
-          },
-          {
-            value: "Do you like pizza?",
-            locale: ELangs.en,
-          },
-        ],
+        csTitle: "Cestujete sami?",
+        enTitle: "Are you traveling alone?",
+        validation: EFormFieldValidation.required,
+        validationValue: "",
       },
     ],
     createdAt: nowBeforeTwoHours,
     updatedAt: nowBeforeTwoHours,
   },
   {
-    id: "2",
-    title: [
-      {
-        value: "Výběr jídla pro restauraci",
-        locale: ELangs.cs,
-      },
-      {
-        value: "Food selection for restaurant",
-        locale: ELangs.en,
-      },
-    ],
+    id: v4(),
+    csTitle: "Výběr jídla pro restauraci",
+    enTitle: "Food selection for restaurant",
     fields: [
       {
         type: EFormFieldType.text,
-        validations: [
-          {
-            type: EFormFieldValidation.required,
-            error: ETranslatableErrors.requiredField,
-          },
-        ],
-        title: [
-          {
-            value: "Jaké jídlo byste si přáli v naší restauraci",
-            locale: ELangs.cs,
-          },
-          {
-            value: "What kind of food would you like in our restaurant?",
-            locale: ELangs.en,
-          },
-        ],
+        csTitle: "Jaké jídlo byste si přáli v naší restauraci?",
+        enTitle: "What kind of food would you like in our restaurant?",
+        validation: EFormFieldValidation.required,
+        validationValue: "",
       },
       {
         type: EFormFieldType.boolean,
-        validations: [
-          {
-            type: EFormFieldValidation.required,
-            error: ETranslatableErrors.requiredField,
-          },
-        ],
-        title: [
-          {
-            value: "Máte rádi pizzu?",
-            locale: ELangs.cs,
-          },
-          {
-            value: "Do you like pizza?",
-            locale: ELangs.en,
-          },
-        ],
+        csTitle: "Máte rádi pizzu?",
+        enTitle: "Do you like pizza?",
+        validation: EFormFieldValidation.required,
+        validationValue: "",
       },
     ],
     createdAt: now,

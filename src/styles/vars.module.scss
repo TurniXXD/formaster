@@ -1,6 +1,7 @@
 $primary: #191c1d;
 $secondary: #a599b5;
 $gray: #2e2f2f;
+$graySecondary: #3d3d3d;
 $lightGray: #acbdba;
 $darkGray: #242727;
 $azure: #cddddd;
@@ -98,6 +99,33 @@ $xxl: 1506px;
   background-color: $primary;
   color: $azure;
   gap: $spacing * 1.5;
+}
+
+@mixin field {
+  border: 2px solid $graySecondary;
+  background-color: $primary;
+  border-radius: $radius;
+  font-size: 16px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  color: $text;
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px $primary inset !important;
+    -webkit-text-fill-color: $azure !important;
+  }
+}
+
+@mixin card {
+  border-radius: $radius;
+  box-shadow: 0px 0px 15px 2px $shadow;
+  padding: 1.5rem 2rem;
+  background-color: $gray;
+  max-width: 100%;
 }
 
 // Example module export

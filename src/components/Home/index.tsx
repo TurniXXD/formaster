@@ -10,15 +10,15 @@ import { Forms } from "@/types";
 
 export default function Home({ session }: { session: Session | null }) {
   const router = useRouter();
-  const { value, setLocalStorageValue } = useLocalStorage<Forms>(
+  const { value: forms, setValue } = useLocalStorage<Forms>(
     ELocalStorageItems.forms
   );
 
   useEffect(() => {
-    if (session && value === null) {
-      setLocalStorageValue(testForms);
+    if (session && forms === null) {
+      setValue(testForms);
     }
-  }, [value, session, setLocalStorageValue]);
+  }, [forms, session, setValue]);
 
   if (!session) {
     router.push("/auth/login");

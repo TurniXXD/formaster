@@ -46,7 +46,7 @@ export default function UpperBar({
           <Title size={ETitleSize.lg}>{t("title")}</Title>
         )}
         <div className={styles.actionArea}>
-          <LangSelect locale={locale} />
+          <LangSelect locale={locale} pathname={pathname} />
           {isMobile && isAuthenticated ? (
             openMobileMenu ? (
               <X

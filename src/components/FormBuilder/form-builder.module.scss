@@ -1,0 +1,119 @@
+@use "./../../styles/vars.module" as *;
+
+.formBuilder {
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing;
+    .formActionButtonsWrapper {
+      display: flex;
+      gap: $spacing;
+      button {
+        width: 100%;
+      }
+    }
+    .formField {
+      padding: $spacing * 2 $spacing * 2;
+      display: flex;
+      flex-direction: column;
+      background-color: $gray;
+      border-radius: $radius;
+      gap: $spacing * 2;
+      position: relative;
+      transition: $transition;
+      label {
+        display: block;
+        margin-bottom: $spacing * 0.75;
+      }
+      .formNameTitle {
+        text-align: center;
+      }
+      .formFieldValidationsWrapper {
+        display: flex;
+        gap: $spacing;
+        flex-direction: column;
+        .formFieldValidations {
+          display: flex;
+          gap: $spacing;
+          align-items: center;
+          .formFieldRemoveValidationButton {
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .formFieldAddValidationButton {
+        margin-top: $spacing * 2;
+        display: flex;
+        width: 100%;
+      }
+      .formFieldRemoveButton {
+        height: 10rem;
+        position: absolute;
+        top: $spacing * 2;
+        right: $spacing * 2;
+        svg {
+          height: 1.75rem;
+          width: 1.75rem;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .formFieldPositionAdjustmentButtonWrapper {
+        display: flex;
+        justify-content: center;
+        .formFieldPositionAdjustmentButton {
+          height: 1.75rem;
+          display: flex;
+          justify-content: center;
+          svg {
+            height: 1.75rem;
+            width: 1.75rem;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.formFieldNames {
+  display: flex;
+  gap: $spacing;
+  .formFieldNamesLanguagesCol {
+    width: 2rem;
+  }
+  div {
+    gap: $spacing;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .formFieldName {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+
+@include min-sm {
+  .formBuilder {
+    padding: $spacing;
+    @include card;
+    .form {
+      gap: $spacing * 2;
+      .formField {
+        background-color: $darkGray;
+      }
+    }
+  }
+}
+
+@include min-lg {
+  .formBuilder {
+    padding: $spacing * 3;
+  }
+}

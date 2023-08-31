@@ -24,6 +24,13 @@
   color: $gray;
 }
 .secondary {
-  background-color: $azure;
-  color: $primary;
+  background-color: $primary;
+  color: $text;
+  border: 2px solid $text;
+  box-shadow: none;
+  &:hover {
+    background-color: $azure;
+    box-shadow: 0px 0px 15px 2px $primary;
+    color: $gray;
+  }
 }

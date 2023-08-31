@@ -1,24 +1,28 @@
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
-import styles from './text-field.module.scss';
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import styles from "./text-field.module.scss";
+import { InputHTMLAttributes } from "react";
 
-export interface ITextField {
+export interface ITextField extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * React hook form field props
    */
-  fieldProps: ControllerRenderProps<FieldValues, any>;
-  placeholder?: string;
+  fieldProps?: ControllerRenderProps<FieldValues, any>;
   password?: boolean;
   email?: boolean;
-  className?: string;
 }
 
-export const TextField = (props: ITextField) => {
+export const TextField = ({
+  email,
+  password,
+  fieldProps,
+  ...props
+}: ITextField) => {
   return (
     <input
-      className={`${styles.textField} ${props?.className || ''}`}
-      {...props.fieldProps}
-      {...(props.placeholder && { placeholder: props.placeholder })}
-      type={(props.password && 'password') || (props.email && 'email') || 'text'}
+      className={`${styles.textField} ${props?.className || ""}`}
+      {...props}
+      {...fieldProps}
+      type={(password && "password") || (email && "email") || "text"}
     />
   );
 };

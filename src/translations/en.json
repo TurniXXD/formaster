@@ -8,9 +8,29 @@
     "formTester": "Form tester",
     "email": "Email",
     "password": "Password",
-    "errors": {},
+    "save": "Save",
+    "cancel": "Cancel",
+    "translate": "Translate",
+    "validationsLabel": "Validations",
     "validations": {
-      "isRequired": "This field is required"
+      "required": "Field is required",
+      "starts_with_string_value": "Text must begin with value",
+      "matches_string_value": "Text must match value",
+      "greater_than_number_value": "Value must be greater than",
+      "equal_or_greater_than_number_value": "Value must be equal or greater than",
+      "less_than_number_value": "Value must be less than",
+      "equal_or_less_than_number_value": "Value must be equal or less than"
+    },
+    "form": {
+      "title": "Form title",
+      "name": "Name",
+      "type": "Type",
+      "addNewField": "Add new field",
+      "fieldTypes": {
+        "text": "Text",
+        "number": "Number",
+        "boolean": "Yes / No"
+      }
     }
   },
   "login": {
@@ -23,8 +43,8 @@
       "emailInvalid": "Invalid email"
     },
     "errors": {
-      "invalid_email": "User with this email address doesn't exist",
-      "invalid_password": "Wrong password"
+      "wrong_email": "User with this email address doesn't exist",
+      "wrong_password": "Wrong password"
     }
   },
   "availableForms": {},

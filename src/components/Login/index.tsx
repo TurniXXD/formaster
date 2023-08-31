@@ -9,13 +9,14 @@ import styles from "./login.module.scss";
 import { TextField } from "@/components/UI/TextField";
 import Popup, { PopupType } from "@/components/UI/Popup";
 import { Button } from "@/components/UI/Button";
-import { EAuthProviders, ETranslatableErrors, Forms } from "@/types";
+import { EAuthProviders, Forms } from "@/types";
 import { ArrowRightCircle, GitHub } from "react-feather";
 import { Card } from "../UI/Card";
 import Title, { ETitleSize } from "../UI/Title";
 import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
 import { Session } from "next-auth";
 import { authRedirectConfig } from "@/constants";
+import { ELoginTranslatableErrors } from "./types";
 
 export default function Login({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
@@ -23,25 +24,25 @@ export default function Login({ session }: { session: Session | null }) {
   const t = useTranslations("login");
   const { handleSubmit, control } = useForm();
   const [translatableError, setTranslatableError] =
-    useState<ETranslatableErrors | null>();
-  const { value, removeLocalStorageItem } = useLocalStorage<Forms>(
+    useState<ELoginTranslatableErrors | null>();
+  const { value, removeItem } = useLocalStorage<Forms>(
     ELocalStorageItems.forms
   );
 
   useEffect(() => {
     if (!session && value) {
-      removeLocalStorageItem();
+      removeItem();
     }
-  }, [value, session, removeLocalStorageItem]);
+  }, [value, session, removeItem]);
 
   const errorParam = searchParams.get("error");
 
   useEffect(() => {
     if (
       errorParam &&
-      Object.values(ETranslatableErrors).includes(errorParam as any)
+      Object.values(ELoginTranslatableErrors).includes(errorParam as any)
     ) {
-      setTranslatableError(errorParam as ETranslatableErrors);
+      setTranslatableError(errorParam as ELoginTranslatableErrors);
     }
   }, [errorParam]);
 
@@ -64,7 +65,7 @@ export default function Login({ session }: { session: Session | null }) {
               name="email"
               control={control}
               rules={{
-                required: tCommon("validations.isRequired"),
+                required: tCommon("validations.required"),
                 pattern: {
                   value: /^\S+@\S+$/i,
                   message: t("validations.emailInvalid"),
@@ -84,7 +85,7 @@ export default function Login({ session }: { session: Session | null }) {
             <Controller
               name="password"
               control={control}
-              rules={{ required: tCommon("validations.isRequired") }}
+              rules={{ required: tCommon("validations.required") }}
               render={({ field }) => (
                 <TextField
                   fieldProps={field}

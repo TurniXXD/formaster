@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { testUser } from "@/mock";
 import { AuthOptions } from "next-auth";
 import { authPages } from "@/constants";
-import { ETranslatableErrors } from "@/types";
+import { ELoginTranslatableErrors } from "@/components/Login/types";
 
 const providers = [
   CredentialsProvider({
@@ -16,11 +16,11 @@ const providers = [
     },
     async authorize(credentials) {
       if (credentials?.email !== testUser.email) {
-        throw new Error(ETranslatableErrors.invalidEmail);
+        throw new Error(ELoginTranslatableErrors.wrongEmail);
       }
 
       if (credentials?.password !== testUser.password) {
-        throw new Error(ETranslatableErrors.invalidPassword);
+        throw new Error(ELoginTranslatableErrors.wrongPassword);
       }
 
       return testUser;

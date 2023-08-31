@@ -5,18 +5,6 @@ export enum ELangs {
   en = "en",
 }
 
-export enum ETranslatableErrors {
-  invalidEmail = "invalid_email",
-  invalidPassword = "invalid_password",
-  mustMatch = "must_match",
-  mustStartWith = "must_start_with",
-  requiredField = "required_field",
-  mustBeGreaterThan = "must_be_greater_than",
-  mustBeEqualOrGreaterThan = "must_be_equal_or_greater_than",
-  mustBeLessThan = "must_be_less_than",
-  mustBeEqualOrLessThan = "must_be_equal_or_less_than",
-}
-
 export enum EAuthProviders {
   credentials = "credentials-login",
   github = "github",
@@ -24,21 +12,22 @@ export enum EAuthProviders {
 
 export enum EFormFieldType {
   text = "text",
-  number = "text",
+  number = "number",
   boolean = "boolean",
 }
 
 export enum EFormFieldValidation {
+  none = "none",
   required = "required",
-  startsWith = "startsWith",
-  matches = "matches",
-  greaterThan = "greater",
-  equalOrGreaterThan = "equalOrGreaterThan",
-  lessThan = "less",
-  equalOrLessThan = "equalOrLessThan",
+  startsWith = "starts_with_string_value",
+  matches = "matches_string_value",
+  greaterThan = "greater_than_number_value",
+  equalOrGreaterThan = "equal_or_greater_than_number_value",
+  lessThan = "less_than_number_value",
+  equalOrLessThan = "equal_or_less_than_number_value",
 }
 
-// Interfaces
+// Interfaces & Types
 
 export interface IUser {
   id: string;
@@ -47,29 +36,39 @@ export interface IUser {
   password: string;
 }
 
-interface FormFieldValidation {
+export interface FormFieldValidation {
   type: EFormFieldValidation;
-  error: ETranslatableErrors;
   value?: string;
 }
 
-interface FormTitleInternationalized {
+interface FieldSelectOption {
   value: string;
-  locale: ELangs;
+  label: string;
 }
 
-export type FormTitleTranslationObject = Array<FormTitleInternationalized>;
+export type FieldSelectOptions = Array<FieldSelectOption>;
 
-interface FormField {
-  title: FormTitleTranslationObject;
+export interface FormFieldValidationOptions {
+  common: FieldSelectOptions;
+  textValue: FieldSelectOptions;
+  numberValue: FieldSelectOptions;
+}
+
+export interface FormField {
+  csTitle: string;
+  enTitle: string;
   type: EFormFieldType;
-  validations?: Array<FormFieldValidation>;
+  validation: EFormFieldValidation;
+  validationValue: string;
 }
+
+type FormFields = Array<FormField>;
 
 export interface Form {
   id: string;
-  title: FormTitleTranslationObject;
-  fields: Array<FormField>;
+  csTitle: string;
+  enTitle: string;
+  fields: FormFields;
   createdAt: Date;
   updatedAt: Date;
 }

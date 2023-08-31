@@ -9,6 +9,10 @@ export const isValidJSON = (value: any) => {
   }
 };
 
+export const isValidEmail = (value:  string) => {
+  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)
+}
+
 export const isObject = (value: any) => {
   return typeof value === "object";
 };

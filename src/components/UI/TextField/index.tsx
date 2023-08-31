@@ -10,7 +10,6 @@ interface ITextField extends TInputField {
 export const TextField = ({
   email,
   password,
-  fieldProps,
   error,
   ...props
 }: ITextField) => {
@@ -20,7 +19,6 @@ export const TextField = ({
         error ? globalStyles.fieldError : ""
       }`}
       {...props}
-      {...fieldProps}
       type={(password && "password") || (email && "email") || "text"}
     />
   );

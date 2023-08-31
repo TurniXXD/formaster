@@ -3,8 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { SyntheticEvent, useEffect, useState } from "react";
 import styles from "./login.module.scss";
 import { TextField } from "@/components/UI/TextField";
 import Popup, { EPopupType } from "@/components/UI/Popup";
@@ -17,12 +16,15 @@ import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
 import { Session } from "next-auth";
 import { authRedirectConfig } from "@/constants";
 import { ELoginTranslatableErrors } from "./types";
+import { isValidEmail } from "@/lib";
 
 export default function Login({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const tCommon = useTranslations("common");
   const t = useTranslations("login");
-  const { handleSubmit, control } = useForm();
+  const [email, setEmail] = useState("");
+  const [emailError, setIsEmailError] = useState(false);
+  const [password, setPassword] = useState("");
   const [translatableError, setTranslatableError] =
     useState<ELoginTranslatableErrors | null>();
   const { value, removeItem } = useLocalStorage<TForms>(
@@ -46,10 +48,11 @@ export default function Login({ session }: { session: Session | null }) {
     }
   }, [errorParam]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault()
     signIn(EAuthProviders.credentials, {
-      email: data.email,
-      password: data.password,
+      email,
+      password,
       ...authRedirectConfig,
     });
   };
@@ -58,41 +61,46 @@ export default function Login({ session }: { session: Session | null }) {
     <div className={styles.login}>
       <Card className={styles.loginForm}>
         <Title size={ETitleSize.xl}>{tCommon("login")}</Title>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+        <form onSubmit={onSubmit} className={styles.formWrapper}>
           <div>
             <label>{tCommon("email")}</label>
-            <Controller
+            <TextField
               name="email"
-              control={control}
-              rules={{
-                required: tCommon("validations.required"),
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: t("validations.emailInvalid"),
-                },
+              required
+              placeholder={t("emailPlaceholder")}
+              email
+              error={emailError}
+              onChange={(e) => {
+                console.log({ isValidEmail });
+                if (isValidEmail(e.target.value)) {
+                  setEmail(e.target.value);
+                  setIsEmailError(false);
+                }
               }}
-              render={({ field }) => (
-                <TextField
-                  fieldProps={field}
-                  placeholder={t("emailPlaceholder")}
-                  email
-                />
-              )}
+              onBlur={(e) => {
+                if (!isValidEmail(e.target.value)) {
+                  setIsEmailError(true);
+                }
+              }}
             />
+            {emailError && (
+              <Title
+                className={styles.emailErrorTitle}
+                size={ETitleSize.sm}
+                error
+              >
+                {t("validations.emailInvalid")}
+              </Title>
+            )}
           </div>
           <div>
             <label>{tCommon("password")}</label>
-            <Controller
+            <TextField
               name="password"
-              control={control}
-              rules={{ required: tCommon("validations.required") }}
-              render={({ field }) => (
-                <TextField
-                  fieldProps={field}
-                  placeholder={t("passwordPlaceholder")}
-                  password
-                />
-              )}
+              placeholder={t("passwordPlaceholder")}
+              password
+              required
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Button label={t("loginButton")} icon={<ArrowRightCircle />} submit />
@@ -109,7 +117,10 @@ export default function Login({ session }: { session: Session | null }) {
         />
       </Card>
       {translatableError && (
-        <Popup type={EPopupType.Error} text={t(`errors.${translatableError}`)} />
+        <Popup
+          type={EPopupType.Error}
+          text={t(`errors.${translatableError}`)}
+        />
       )}
     </div>
   );

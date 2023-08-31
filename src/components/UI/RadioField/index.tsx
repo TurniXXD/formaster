@@ -7,25 +7,25 @@ interface IRadioInputProps extends TInputField {
 }
 
 export const RadioField = ({
-  fieldProps,
   options,
   error,
   required,
   ...props
 }: IRadioInputProps) => (
   <div
-    className={`${styles.radioField} ${error ? globalStyles.fieldError : ""}`}
+    className={`${styles.radioFieldWrapper} ${error ? globalStyles.fieldError : ""}`}
   >
     {options.map((option, i) => (
-      <div key={i}>
+      <label key={i} className={styles.radioField}>
         <input
           type="radio"
           value={`${option.value}`}
           defaultChecked={required && i === 0}
           {...props}
         />
-        <span>{option.label}</span>
-      </div>
+        <span className={styles.radioFieldOptionButton}></span>
+        {option.label}
+      </label>
     ))}
   </div>
 );

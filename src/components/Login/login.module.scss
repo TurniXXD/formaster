@@ -24,6 +24,12 @@
         display: block;
         font-size: 14px;
       }
+      div {
+        .emailErrorTitle {
+          display: block;
+          margin-top: $spacing * 0.5;
+        }
+      }
     }
     .providersSeparatorWrapper {
       display: flex;

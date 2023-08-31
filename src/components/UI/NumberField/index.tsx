@@ -4,7 +4,6 @@ import globalStyles from "./../../../styles/vars.module.scss";
 
 export const NumberField = ({
   placeholder,
-  fieldProps,
   error,
   ...props
 }: TInputField) => {
@@ -14,7 +13,6 @@ export const NumberField = ({
         error ? globalStyles.fieldError : ""
       }`}
       {...props}
-      {...fieldProps}
       min={0}
       type="number"
     />

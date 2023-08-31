@@ -34,7 +34,11 @@ export default function Navigation() {
         <Link
           key={i}
           href={link.path}
-          className={pathname === link.path ? styles.active : ""}
+          className={
+            pathname.replace(/\/[a-f\d-]+\/$/, "/") === link.path
+              ? styles.active
+              : ""
+          }
         >
           {link.title}
         </Link>

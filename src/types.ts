@@ -1,7 +1,6 @@
 // Enums
 
 import { InputHTMLAttributes } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 export enum ELangs {
   cs = "cs",
@@ -34,10 +33,6 @@ export enum EFormFieldValidation {
 // Interfaces & Types
 
 export interface IInputFieldCustomProps {
-  /**
-   * React hook form field props
-   */
-  fieldProps?: ControllerRenderProps<FieldValues, any>;
   error?: boolean;
 }
 

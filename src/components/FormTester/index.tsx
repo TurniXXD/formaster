@@ -10,7 +10,7 @@ import {
   TFieldSelectOptions,
   TForms,
 } from "@/types";
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, SyntheticEvent, useEffect, useState } from "react";
 import Title, { ETitleSize } from "../UI/Title";
 import { RadioField } from "../UI/RadioField";
 import { createBooleanOptions, validateValue } from "@/lib/forms";
@@ -59,7 +59,7 @@ export default function FormTester({ id }: { id: string }) {
     );
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setFieldsWithValidationError([]);
     let hasErrors = false;

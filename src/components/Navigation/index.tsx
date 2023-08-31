@@ -1,24 +1,23 @@
 "use client";
 
-import { removeLocalePrefix } from "@/lib";
 import styles from "./navigation.module.scss";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const createLinksArray = (t: any) => {
+const createLinksArray = (t: any, locale: string) => {
   return [
     {
       title: t("availableForms"),
-      path: "/",
+      path: `/${locale}/`,
     },
     {
       title: t("formBuilder"),
-      path: "/form-builder/",
+      path: `/${locale}/form-builder/`,
     },
     {
       title: t("formTester"),
-      path: "/form-tester/",
+      path: `/${locale}/form-tester/`,
     },
   ];
 };
@@ -26,7 +25,8 @@ const createLinksArray = (t: any) => {
 export default function Navigation() {
   const t = useTranslations("common");
   const pathname = usePathname();
-  const links = createLinksArray(t);
+  const locale = useLocale();
+  const links = createLinksArray(t, locale);
 
   return (
     <div className={styles.navigation}>
@@ -34,9 +34,7 @@ export default function Navigation() {
         <Link
           key={i}
           href={link.path}
-          className={
-            removeLocalePrefix(pathname) === link.path ? styles.active : ""
-          }
+          className={pathname === link.path ? styles.active : ""}
         >
           {link.title}
         </Link>

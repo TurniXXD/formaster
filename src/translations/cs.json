@@ -35,7 +35,11 @@
         "text": "Text",
         "number": "Číslo",
         "boolean": "Ano / Ne"
-      }
+      },
+      "questionsCount": "Počet otázek",
+      "createdAt": "Vytvořeno",
+      "updatedAt": "Upraveno",
+      "successfullySaved": "Formulář uložen"
     },
     "nothingFound": "Nic nenalezeno"
   },
@@ -58,8 +62,6 @@
   "formTester": {
     "openForm": "Přejít k vyplnění",
     "questionsCount": "Otázek k vyplnění",
-    "createdAt": "Vytvořeno",
-    "updatedAt": "Upraveno",
     "validate": "Validovat",
     "valid": "Formulář je validně vyplněn",
     "invalid": "Formulář není validně vyplněn"

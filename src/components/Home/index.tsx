@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { testForms } from "@/mock";
 import { TForms } from "@/types";
 import Loader from "../UI/Loader";
+import { NotFound } from "../NotFound";
 
 export default function Home({ session }: { session: Session | null }) {
   const router = useRouter();
@@ -33,5 +34,9 @@ export default function Home({ session }: { session: Session | null }) {
     return <Loader />;
   }
 
-  return <FormsList />;
+  if (!forms) {
+    return <NotFound/>
+  }
+
+  return <FormsList forms={forms} />;
 }

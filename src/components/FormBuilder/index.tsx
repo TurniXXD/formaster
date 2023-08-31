@@ -13,7 +13,7 @@ import {
   EFormFieldValidation,
 } from "@/types";
 import { TextField } from "../UI/TextField";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import {
   createFieldTypeOptions,
   createNewFormObject,
@@ -40,6 +40,7 @@ import {
   THandleFormTitleChange,
 } from "./types";
 import Loader from "../UI/Loader";
+import Popup, { EPopupType } from "../UI/Popup";
 
 export default function FormBuilder() {
   const t = useTranslations("common");
@@ -55,8 +56,14 @@ export default function FormBuilder() {
   const [fields, setFields] = useState<Array<IFormField>>(
     editableForm ? editableForm.fields : [newFormField]
   );
-  const [csFormTitle, setCsFormTitle] = useState("");
-  const [enFormTitle, setEnFormTitle] = useState("");
+  const [csFormTitle, setCsFormTitle] = useState(
+    editableForm ? editableForm.csTitle : ""
+  );
+  const [enFormTitle, setEnFormTitle] = useState(
+    editableForm ? editableForm.enTitle : ""
+  );
+  const [showFormSavedPopup, setShowFormSavedPopup] =
+    useState<EPopupType | null>(null);
   const deeplTranslationTargetLang = isCsLocale ? ELangs.en : ELangs.cs;
   const fieldTypeOptions = createFieldTypeOptions(t);
   const formFieldValidationsOptions = createValidationsOptions(t);
@@ -69,7 +76,8 @@ export default function FormBuilder() {
     return <Loader />;
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
     if (forms) {
       if (editableForm) {
         const formsWithoutEditedForm = forms.filter(
@@ -87,6 +95,10 @@ export default function FormBuilder() {
         ];
 
         setValue(withEditedForm);
+        setFields([newFormField]);
+        setCsFormTitle("");
+        setEnFormTitle("");
+        setShowFormSavedPopup(EPopupType.Success);
         return;
       }
 
@@ -100,6 +112,10 @@ export default function FormBuilder() {
       ];
 
       setValue(withNewForm);
+      setFields([newFormField]);
+      setCsFormTitle("");
+      setEnFormTitle("");
+      setShowFormSavedPopup(EPopupType.Success);
     }
   };
 
@@ -245,13 +261,11 @@ export default function FormBuilder() {
             isCsLocale={isCsLocale}
             csTitleValue={csFormTitle}
             enTitleValue={enFormTitle}
-            locale={locale}
             handleFormTitleChange={handleFormTitleChange}
             handleFieldValueTranslation={handleFieldValueTranslation}
             handleFormFieldPartChange={handleFormFieldPartChange}
           />
         </div>
-
         {fields?.map((field, i) => {
           return (
             <div className={styles.formField} key={i}>
@@ -277,7 +291,6 @@ export default function FormBuilder() {
                 <FormFieldTranslations
                   t={t}
                   isCsLocale={isCsLocale}
-                  locale={locale}
                   csTitleValue={field.csTitle}
                   enTitleValue={field.enTitle}
                   formFieldIndex={i}
@@ -287,7 +300,6 @@ export default function FormBuilder() {
               </div>
               <div className={styles.formFieldType}>
                 <label>{t("form.type")}</label>
-
                 <SelectField
                   name={`${i}-type`}
                   options={fieldTypeOptions}
@@ -344,6 +356,13 @@ export default function FormBuilder() {
           <Button label={t("save")} submit fullWidth />
         </div>
       </form>
+      {showFormSavedPopup && (
+        <Popup
+          type={EPopupType.Success}
+          text={t("form.successfullySaved")}
+          setTrigger={setShowFormSavedPopup}
+        />
+      )}
     </div>
   );
 }
@@ -394,6 +413,7 @@ const FormFieldValidations = ({
           <TextField
             defaultValue={formField.validationValue}
             name={`${formFieldIndex}-validation-value`}
+            required
             onBlur={(e) =>
               handleFormFieldPartChange({
                 formFieldIndex,
@@ -408,6 +428,7 @@ const FormFieldValidations = ({
             <NumberField
               defaultValue={formField.validationValue}
               name={`${formFieldIndex}-validation-value`}
+              required
               onBlur={(e) =>
                 handleFormFieldPartChange({
                   formFieldIndex,
@@ -425,7 +446,6 @@ const FormFieldValidations = ({
 const FormFieldTranslations = ({
   t,
   isCsLocale,
-  locale,
   formFieldIndex,
   csTitleValue,
   enTitleValue,
@@ -435,7 +455,6 @@ const FormFieldTranslations = ({
 }: {
   t: any;
   isCsLocale: boolean;
-  locale: ELangs;
   formFieldIndex?: number;
   csTitleValue: string;
   enTitleValue: string;
@@ -464,10 +483,11 @@ const FormFieldTranslations = ({
           <TextField
             value={isCsLocale ? csTitleValue : enTitleValue}
             name={`${formFieldIndex}-source-title`}
+            required
             onChange={(e) =>
               isFormTitle
                 ? handleFormTitleChange({
-                    locale,
+                    locale: isCsLocale ? ELangs.cs : ELangs.en,
                     value: e.target.value,
                   })
                 : formFieldIndex !== undefined &&
@@ -485,10 +505,11 @@ const FormFieldTranslations = ({
           <TextField
             value={isCsLocale ? enTitleValue : csTitleValue}
             name={`${formFieldIndex}-translated-title`}
+            required
             onChange={(e) =>
               isFormTitle
                 ? handleFormTitleChange({
-                    locale,
+                    locale: isCsLocale ? ELangs.en : ELangs.cs,
                     value: e.target.value,
                   })
                 : formFieldIndex !== undefined &&

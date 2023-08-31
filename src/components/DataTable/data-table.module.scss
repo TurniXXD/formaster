@@ -1,0 +1,65 @@
+@use "./../../styles/vars.module" as *;
+
+.dataTable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: $spacing 0;
+  th,
+  td {
+    text-align: left;
+    gap: $spacing;
+    padding: $spacing;
+  }
+  th {
+    cursor: pointer;
+    position: relative;
+    transition: $transition;
+    border-radius: $radius;
+    &:hover {
+      background-color: $darkGray;
+    }
+    padding-bottom: $spacing;
+  }
+  td:last-child,
+  td:nth-last-child(2) {
+    padding: 0;
+    width: 4rem;
+    div {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      * {
+        display: flex;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $darkGray;
+    }
+  }
+  td {
+    border-top: 1px solid $azure;
+    transition: $transition;
+  }
+  .sortIcon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 5px 0;
+    border-color: #666 transparent transparent transparent;
+    &.asc {
+      border-width: 0 5px 6px;
+      border-color: transparent transparent #666 transparent;
+    }
+  }
+}
+
+.activeSortHeader {
+  background-color: $graySecondary
+}

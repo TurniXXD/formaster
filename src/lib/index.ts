@@ -1,13 +1,5 @@
 import { format } from "date-fns";
 
-/**
- * Remove locale prefix for path
- * @returns `/path/without/locale/prefix/`
- */
-export const removeLocalePrefix = (path: string) => {
-  return path.replace(/^\/[^/]+/, "");
-};
-
 export const isValidJSON = (value: any) => {
   try {
     JSON.parse(value);
@@ -29,7 +21,8 @@ export const isArrayofObjects = (value: any) => {
  * Default formatting for dates in this project
  */
 export const formatDateTime = (date: Date) => {
-  return format(date, "dd.MM.yyyy HH:mm");
+  const newDate = new Date(date)
+  return format(newDate, "dd.MM.yyyy HH:mm");
 };
 
 export const convertToNumberIfPossible = (value: string | number) => {

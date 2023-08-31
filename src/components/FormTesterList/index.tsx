@@ -16,6 +16,7 @@ import Loader from "../UI/Loader";
 
 export default function FormTesterList() {
   const t = useTranslations("formTester");
+  const tCommon = useTranslations("common");
   const locale = useLocale();
   const { value: forms } = useLocalStorage<TForms>(ELocalStorageItems.forms);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,12 +45,12 @@ export default function FormTesterList() {
                 <span>{form.fields.length}</span>
               </div>
               <div>
-                <span>{t("createdAt")}:</span>
-                <span>{formatDateTime(new Date(form.createdAt))}</span>
+                <span>{tCommon("form.createdAt")}:</span>
+                <span>{formatDateTime(form.createdAt)}</span>
               </div>
               <div>
-                <span>{t("updatedAt")}:</span>
-                <span>{formatDateTime(new Date(form.updatedAt))}</span>
+                <span>{tCommon("form.updatedAt")}:</span>
+                <span>{formatDateTime(form.updatedAt)}</span>
               </div>
             </div>
             <Button

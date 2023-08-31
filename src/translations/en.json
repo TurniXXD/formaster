@@ -35,7 +35,11 @@
         "text": "Text",
         "number": "Number",
         "boolean": "Yes / No"
-      }
+      },
+      "questionsCount": "Questions count",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "successfullySaved": "Form saved"
     },
     "nothingFound": "Nothing found"
   },
@@ -58,8 +62,6 @@
   "formTester": {
     "openForm": "Open form",
     "questionsCount": "Number of questions",
-    "createdAt": "Created",
-    "updatedAt": "Updated",
     "validate": "Validate",
     "valid": "Form is valid",
     "invalid": "Form is invalid"

@@ -71,7 +71,6 @@ export default function Login({ session }: { session: Session | null }) {
               email
               error={emailError}
               onChange={(e) => {
-                console.log({ isValidEmail });
                 if (isValidEmail(e.target.value)) {
                   setEmail(e.target.value);
                   setIsEmailError(false);

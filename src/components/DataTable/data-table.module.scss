@@ -61,5 +61,16 @@
 }
 
 .activeSortHeader {
-  background-color: $graySecondary
+  background-color: $graySecondary;
+}
+
+@include max-lg {
+  .dataTable {
+    td:nth-last-child(3),
+    th:last-child,
+    td:nth-last-child(4),
+    th:nth-last-child(2) {
+      display: none;
+    }
+  }
 }

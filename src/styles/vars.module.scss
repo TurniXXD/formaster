@@ -112,12 +112,17 @@ $xxl: 1506px;
   box-sizing: border-box;
   outline: none;
   color: $text;
+  transition: $transition;
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px $primary inset !important;
     -webkit-text-fill-color: $azure !important;
+  }
+  &:hover,
+  &:focus {
+    border-color: $azure;
   }
 }
 

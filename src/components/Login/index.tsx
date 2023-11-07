@@ -49,7 +49,7 @@ export default function Login({ session }: { session: Session | null }) {
   }, [errorParam]);
 
   const onSubmit = (e: SyntheticEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     signIn(EAuthProviders.credentials, {
       email,
       password,
@@ -71,13 +71,18 @@ export default function Login({ session }: { session: Session | null }) {
               email
               error={emailError}
               onChange={(e) => {
+                if (!e.target.value) {
+                  setIsEmailError(false);
+                  return;
+                }
+
                 if (isValidEmail(e.target.value)) {
                   setEmail(e.target.value);
                   setIsEmailError(false);
                 }
               }}
               onBlur={(e) => {
-                if (!isValidEmail(e.target.value)) {
+                if (e.target.value && !isValidEmail(e.target.value)) {
                   setIsEmailError(true);
                 }
               }}

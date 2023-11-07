@@ -12,12 +12,15 @@ import { v4 } from "uuid";
 import { convertToNumberIfPossible } from ".";
 
 export const createNewFormObject = (
-  form: Omit<IForm, "id" | "createdAt" | "updatedAt"> & { id?: string }
+  form: Omit<IForm, "id" | "createdAt" | "updatedAt"> & {
+    id?: string;
+    createdAt?: Date;
+  }
 ): IForm => {
   const now = new Date();
   return {
     id: form.id || v4(),
-    createdAt: now,
+    createdAt: form.createdAt || now,
     updatedAt: now,
     ...form,
   };

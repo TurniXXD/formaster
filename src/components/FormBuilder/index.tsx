@@ -91,6 +91,7 @@ export default function FormBuilder() {
             fields,
             csTitle: csFormTitle,
             enTitle: enFormTitle,
+            createdAt: editableForm.createdAt,
           }),
         ];
 

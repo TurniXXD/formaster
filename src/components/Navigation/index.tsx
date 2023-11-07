@@ -30,20 +30,25 @@ export default function Navigation() {
 
   return (
     <div className={styles.navigation}>
-      {links.map((link, i) => (
-        <Link
-          key={i}
-          href={`/${locale}${link.path}`}
-          className={
-            pathname?.replace(/\/[a-f\d-]+\/$/, "/") === link.path
-              ? styles.active
-              : ""
-          }
-          data-testid={link.path}
-        >
-          {link.title}
-        </Link>
-      ))}
+      {links.map((link, i) => {
+        const pathnameMatched = pathname.match(/^\/[^/]+\/([^/]+)(?:\/|$)/);
+        const pathnameParsed =
+          pathnameMatched && pathnameMatched[1]
+            ? `/${pathnameMatched[1]}/`
+            : "/";
+        const isActiveLink = pathnameParsed === link.path;
+
+        return (
+          <Link
+            key={i}
+            href={`/${locale}${link.path}`}
+            className={isActiveLink ? styles.active : ""}
+            data-testid={link.path}
+          >
+            {link.title}
+          </Link>
+        );
+      })}
     </div>
   );
 }

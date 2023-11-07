@@ -9,7 +9,7 @@ import { Card } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
 import { ArrowRightCircle } from "react-feather";
 import { ELocalStorageItems, useLocalStorage } from "@/lib/hooks";
-import { ELangs, TForms } from "@/types";
+import { ELangs, ERoutesPaths, TForms } from "@/types";
 import { useEffect, useState } from "react";
 import { NotFound } from "../NotFound";
 import Loader from "../UI/Loader";
@@ -36,21 +36,31 @@ export default function FormTesterList() {
   return (
     <section className={styles.formTesterList}>
       {forms?.map((form, i) => (
-        <Link key={i} href={`/form-tester/${form.id}`}>
+        <Link
+          key={i}
+          href={`${ERoutesPaths.formTester}${form.id}`}
+          data-testid={form.id}
+        >
           <Card className={styles.formCard}>
             <Title>{locale === ELangs.cs ? form.csTitle : form.enTitle}</Title>
             <div className={styles.formProperties}>
               <div>
                 <span>{t("questionsCount")}:</span>
-                <span>{form.fields.length}</span>
+                <span data-testid={`${form.id}-fields-count`}>
+                  {form.fields.length}
+                </span>
               </div>
               <div>
                 <span>{tCommon("form.createdAt")}:</span>
-                <span>{formatDateTime(form.createdAt)}</span>
+                <span data-testid={`${form.id}-created-at`}>
+                  {formatDateTime(form.createdAt)}
+                </span>
               </div>
               <div>
                 <span>{tCommon("form.updatedAt")}:</span>
-                <span>{formatDateTime(form.updatedAt)}</span>
+                <span data-testid={`${form.id}-updated-at`}>
+                  {formatDateTime(form.updatedAt)}
+                </span>
               </div>
             </div>
             <Button

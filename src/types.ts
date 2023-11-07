@@ -1,6 +1,6 @@
-// Enums
-
 import { InputHTMLAttributes } from "react";
+
+// Enums
 
 export enum ELangs {
   cs = "cs",
@@ -28,6 +28,13 @@ export enum EFormFieldValidation {
   equalOrGreaterThan = "equal_or_greater_than_number_value",
   lessThan = "less_than_number_value",
   equalOrLessThan = "equal_or_less_than_number_value",
+}
+
+export enum ERoutesPaths {
+  root = "/",
+  authLogin = "/auth/login/",
+  formBuilder = "/form-builder/",
+  formTester = "/form-tester/",
 }
 
 // Interfaces & Types

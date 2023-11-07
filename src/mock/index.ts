@@ -1,12 +1,11 @@
 import { EFormFieldType, EFormFieldValidation, IForm, IUser } from "@/types";
-import { v4 } from "uuid";
 
 const now = new Date();
 const nowBeforeTwoHours = new Date(now);
 nowBeforeTwoHours.setHours(nowBeforeTwoHours.getHours() - 2);
 
 export const testUser: IUser = {
-  id: v4(),
+  id: "550e8400-e29b-41d4-a716-446655440000",
   name: "Jan Novák",
   email: "jnovak@seznam.cz",
   password: "Nov4k_j3_n3j",
@@ -14,7 +13,7 @@ export const testUser: IUser = {
 
 export const testForms: Array<IForm> = [
   {
-    id: v4(),
+    id: "08b554e8-585c-468f-a4af-d724435f374a",
     csTitle: "Plánování dovolené",
     enTitle: "Vacation planning",
     fields: [
@@ -44,7 +43,7 @@ export const testForms: Array<IForm> = [
     updatedAt: nowBeforeTwoHours,
   },
   {
-    id: v4(),
+    id: "ac5d44ea-7380-4988-9620-163ee6dc7900",
     csTitle: "Výběr jídla pro restauraci",
     enTitle: "Food selection for restaurant",
     fields: [
@@ -63,7 +62,7 @@ export const testForms: Array<IForm> = [
         validationValue: "",
       },
     ],
-    createdAt: now,
+    createdAt: nowBeforeTwoHours,
     updatedAt: now,
   },
 ];

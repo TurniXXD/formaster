@@ -12,7 +12,7 @@ import {
   TForms,
   EFormFieldValidation,
 } from "@/types";
-import { TextField } from "../UI/TextField";
+import TextField from "../UI/TextField";
 import { SyntheticEvent, useEffect, useState } from "react";
 import {
   createFieldTypeOptions,

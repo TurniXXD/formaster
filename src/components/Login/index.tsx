@@ -3,9 +3,17 @@
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { SyntheticEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+  FocusEvent,
+  MouseEvent,
+} from "react";
 import styles from "./login.module.scss";
-import { TextField } from "@/components/UI/TextField";
+import TextField from "@/components/UI/TextField";
 import Popup, { EPopupType } from "@/components/UI/Popup";
 import { Button } from "@/components/UI/Button";
 import { EAuthProviders, TForms } from "@/types";
@@ -23,6 +31,7 @@ export default function Login({ session }: { session: Session | null }) {
   const tCommon = useTranslations("common");
   const t = useTranslations("login");
   const [email, setEmail] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const [emailError, setIsEmailError] = useState(false);
   const [password, setPassword] = useState("");
   const [translatableError, setTranslatableError] =
@@ -30,6 +39,12 @@ export default function Login({ session }: { session: Session | null }) {
   const { value, removeItem } = useLocalStorage<TForms>(
     ELocalStorageItems.forms
   );
+
+  useEffect(() => {
+    if (emailInputRef.current) {
+      emailInputRef.current?.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (!session && value) {
@@ -57,36 +72,74 @@ export default function Login({ session }: { session: Session | null }) {
     });
   };
 
+  const handleEmailOnChange = () => {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.value) {
+        setIsEmailError(false);
+        return;
+      }
+
+      if (isValidEmail(e.target.value)) {
+        setEmail(e.target.value);
+        setIsEmailError(false);
+      }
+    };
+  };
+
+  const handleEmailOnBlur = () => {
+    return (e: FocusEvent<HTMLInputElement>) => {
+      if (e.target.value && !isValidEmail(e.target.value)) {
+        setIsEmailError(true);
+      }
+    };
+  };
+
+  const handlePasswordOnChange = () => {
+    return (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+  };
+
+  const handleLoginOnClick = () => {
+    return () => signIn(EAuthProviders.github, authRedirectConfig);
+  };
+
+  const [kokot, setKokot] = useState(false);
+
   return (
     <div className={styles.login}>
       <Card className={styles.loginForm}>
         <Title size={ETitleSize.xl}>{tCommon("login")}</Title>
         <form onSubmit={onSubmit} className={styles.formWrapper}>
           <div>
-            <label>{tCommon("email")}</label>
-            <TextField
-              name="email"
-              required
-              placeholder={t("emailPlaceholder")}
-              email
-              error={emailError}
-              onChange={(e) => {
-                if (!e.target.value) {
-                  setIsEmailError(false);
-                  return;
-                }
-
-                if (isValidEmail(e.target.value)) {
-                  setEmail(e.target.value);
-                  setIsEmailError(false);
-                }
-              }}
-              onBlur={(e) => {
-                if (e.target.value && !isValidEmail(e.target.value)) {
-                  setIsEmailError(true);
-                }
-              }}
-            />
+            <label onClick={() => setKokot((value) => !value)}>
+              {tCommon("email")}
+            </label>
+            {kokot ? (
+              <TextField
+                name="email"
+                required
+                placeholder={t("emailPlaceholder")}
+                email
+                key="kokot"
+                title="component 1"
+                autoFocus
+                error={emailError}
+                onChange={handleEmailOnChange}
+                onBlur={handleEmailOnBlur}
+              />
+            ) : (
+              <TextField
+                name="email"
+                required
+                placeholder={t("emailPlaceholder")}
+                email
+                key="kokot"
+                title="component 2"
+                error={emailError}
+                ref={emailInputRef}
+                onChange={handleEmailOnChange}
+                onBlur={handleEmailOnBlur}
+              />
+            )}
             {emailError && (
               <Title
                 className={styles.emailErrorTitle}
@@ -103,8 +156,9 @@ export default function Login({ session }: { session: Session | null }) {
               name="password"
               placeholder={t("passwordPlaceholder")}
               password
+              key="kokot"
               required
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordOnChange}
             />
           </div>
           <Button label={t("loginButton")} icon={<ArrowRightCircle />} submit />
@@ -117,7 +171,7 @@ export default function Login({ session }: { session: Session | null }) {
         <Button
           label={t("github")}
           icon={<GitHub />}
-          onClick={() => signIn(EAuthProviders.github, authRedirectConfig)}
+          onClick={handleLoginOnClick}
         />
       </Card>
       {translatableError && (

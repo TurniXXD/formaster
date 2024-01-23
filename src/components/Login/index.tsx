@@ -10,7 +10,6 @@ import {
   useRef,
   useState,
   FocusEvent,
-  MouseEvent,
 } from "react";
 import styles from "./login.module.scss";
 import TextField from "@/components/UI/TextField";
@@ -72,37 +71,28 @@ export default function Login({ session }: { session: Session | null }) {
     });
   };
 
-  const handleEmailOnChange = () => {
-    return (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target.value) {
-        setIsEmailError(false);
-        return;
-      }
+  const handleEmailOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) {
+      setIsEmailError(false);
+      return;
+    }
 
-      if (isValidEmail(e.target.value)) {
-        setEmail(e.target.value);
-        setIsEmailError(false);
-      }
-    };
+    if (isValidEmail(e.target.value)) {
+      setEmail(e.target.value);
+      setIsEmailError(false);
+    }
   };
 
-  const handleEmailOnBlur = () => {
-    return (e: FocusEvent<HTMLInputElement>) => {
-      if (e.target.value && !isValidEmail(e.target.value)) {
-        setIsEmailError(true);
-      }
-    };
+  const handleEmailOnBlur = (e: FocusEvent<HTMLInputElement>) => {
+    if (e.target.value && !isValidEmail(e.target.value)) {
+      setIsEmailError(true);
+    }
   };
 
-  const handlePasswordOnChange = () => {
-    return (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+  const handlePasswordOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
   };
 
-  const handleLoginOnClick = () => {
-    return () => signIn(EAuthProviders.github, authRedirectConfig);
-  };
-
-  const [kokot, setKokot] = useState(false);
 
   return (
     <div className={styles.login}>
@@ -110,24 +100,10 @@ export default function Login({ session }: { session: Session | null }) {
         <Title size={ETitleSize.xl}>{tCommon("login")}</Title>
         <form onSubmit={onSubmit} className={styles.formWrapper}>
           <div>
-            <label onClick={() => setKokot((value) => !value)}>
+            <label>
               {tCommon("email")}
             </label>
-            {kokot ? (
-              <TextField
-                name="email"
-                required
-                placeholder={t("emailPlaceholder")}
-                email
-                key="kokot"
-                title="component 1"
-                autoFocus
-                error={emailError}
-                onChange={handleEmailOnChange}
-                onBlur={handleEmailOnBlur}
-              />
-            ) : (
-              <TextField
+            <TextField
                 name="email"
                 required
                 placeholder={t("emailPlaceholder")}
@@ -139,7 +115,6 @@ export default function Login({ session }: { session: Session | null }) {
                 onChange={handleEmailOnChange}
                 onBlur={handleEmailOnBlur}
               />
-            )}
             {emailError && (
               <Title
                 className={styles.emailErrorTitle}
@@ -171,7 +146,7 @@ export default function Login({ session }: { session: Session | null }) {
         <Button
           label={t("github")}
           icon={<GitHub />}
-          onClick={handleLoginOnClick}
+          onClick={() => signIn(EAuthProviders.github, authRedirectConfig)}
         />
       </Card>
       {translatableError && (
